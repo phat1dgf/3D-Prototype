@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class PlayerMoving : M_MonoBehaviour
 {
@@ -10,8 +11,7 @@ public class PlayerMoving : M_MonoBehaviour
     [SerializeField] private float _speed, _runSpeed, _walkSpeed, _jumpHeight;
     [SerializeField] private bool _isJumping;
     [SerializeField] private LayerMask _layerMask;
-    private Vector3 _jumpDirection;
-
+    [SerializeField] private Vector3 vectorHorizontal, vectorVertical , _jumpDir;
 
     protected override void Reset()
     {
@@ -57,33 +57,39 @@ public class PlayerMoving : M_MonoBehaviour
     private void Moving()
     {
         _movement = Vector3.zero;
-        _movement.x = Input.GetAxisRaw("Horizontal");
-        _movement.z = Input.GetAxisRaw("Vertical");
-        Vector3 moveDirection = (_movement.x * transform.right + _movement.z * transform.forward).normalized;
+        vectorHorizontal = Input.GetAxisRaw("Horizontal") * this.transform.parent.right;
+        vectorVertical = Input.GetAxisRaw("Vertical") * this.transform.parent.forward;
+
         if (_isJumping)
         {
-            if (moveDirection != Vector3.zero && Vector3.Dot(moveDirection, _jumpDirection) < 0.95f)
+            Vector3 moveDir = vectorHorizontal + vectorVertical;
+            if (moveDir != Vector3.zero && Vector3.Dot(moveDir, _jumpDir) > 0.5f)
             {
-                moveDirection = _jumpDirection;
+                return;
             }
-            else if (moveDirection == Vector3.zero)
+            else if (moveDir == Vector3.zero)
             {
-                moveDirection = _jumpDirection;
+                return;
+            }
+            else if (moveDir != Vector3.zero && Vector3.Dot(moveDir, _jumpDir) < 0.5f)
+            {
+                this._rigid.velocity = new Vector3(0, this._rigid.velocity.y, 0);
+                return;
             }
         }
-        
-         moveDirection.y = _rigid.velocity.y;
-         _rigid.MovePosition(_rigid.position + moveDirection * _speed * Time.deltaTime);
-        
-    }
 
+        _movement.x = vectorHorizontal.x + vectorVertical.x;
+        _movement.z = vectorHorizontal.z + vectorVertical.z;
+        _movement.Normalize();
+        this._rigid.velocity = new Vector3(_movement.x , this._rigid.velocity.y / _speed ,_movement.z ) * _speed;
+    }
 
     private void Jumping()
     {
         if(Input.GetKeyDown(KeyCode.Space) && !_isJumping)
         {
             _isJumping = true;
-            _jumpDirection = (_movement.x * transform.right + _movement.z * transform.forward).normalized;
+            _jumpDir = (vectorHorizontal + vectorVertical).normalized;
             _rigid.AddForce(Vector3.up * _jumpHeight, ForceMode.Impulse);
         }
     }
@@ -91,8 +97,6 @@ public class PlayerMoving : M_MonoBehaviour
     {
         bool isHitting = Physics.CheckSphere(this.transform.position, 0.3f, _layerMask);
         _isJumping = !isHitting;
-        Debug.Log(_isJumping);
-        Debug.Log(isHitting);
     }
 
 }
