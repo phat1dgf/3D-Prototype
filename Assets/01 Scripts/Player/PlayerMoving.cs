@@ -6,13 +6,21 @@ using UnityEngine.EventSystems;
 
 public class PlayerMoving : M_MonoBehaviour
 {
-    [SerializeField] private Rigidbody _rigid;
+    [Header("--------------Walk and Run-------------")]
     [SerializeField] private Vector3 _movement;
-    [SerializeField] private float _speed, _runSpeed, _walkSpeed, _jumpHeight;
+    [SerializeField] private float _speed, _runSpeed, _walkSpeed;    
+    [SerializeField] private Vector3 vectorHorizontal, vectorVertical;
+    
+    [Space(3)]
+    [Header("--------------Jump-------------")]
+    [SerializeField] private Vector3 _jumpDir;
     [SerializeField] private bool _isJumping;
-    [SerializeField] private LayerMask _layerMask;
-    [SerializeField] private Vector3 vectorHorizontal, vectorVertical , _jumpDir;
+    [SerializeField] private LayerMask _groundLayerMask;
+    [SerializeField] private float _jumpHeight;
 
+    [Space(3)]
+    [Header("--------------Components-------------")]
+    [SerializeField] private Rigidbody _rigid;
     protected override void Reset()
     {
         base.Reset();
@@ -21,7 +29,7 @@ public class PlayerMoving : M_MonoBehaviour
         _speed = _walkSpeed;
         _runSpeed = 18;
         _jumpHeight = 4;
-        _layerMask = LayerMask.GetMask("Ground");
+        _groundLayerMask = LayerMask.GetMask(CONSTANT.LayerName_Ground);
     }
     protected override void LoadComponents()
     {
@@ -95,7 +103,7 @@ public class PlayerMoving : M_MonoBehaviour
     }
     private void JumpTracking()
     {
-        bool isHitting = Physics.CheckSphere(this.transform.position, 0.3f, _layerMask);
+        bool isHitting = Physics.CheckSphere(this.transform.position, 0.3f, _groundLayerMask);
         _isJumping = !isHitting;
     }
 
