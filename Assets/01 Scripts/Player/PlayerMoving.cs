@@ -10,6 +10,8 @@ public class PlayerMoving : M_MonoBehaviour
     [SerializeField] private float _speed, _runSpeed, _walkSpeed, _jumpHeight;
     [SerializeField] private bool _isJumping;
     [SerializeField] private LayerMask _layerMask;
+    private Vector3 _jumpDirection;
+
 
     protected override void Reset()
     {
@@ -18,7 +20,7 @@ public class PlayerMoving : M_MonoBehaviour
         _walkSpeed = 10;
         _speed = _walkSpeed;
         _runSpeed = 18;
-        _jumpHeight = 10;
+        _jumpHeight = 4;
         _layerMask = LayerMask.GetMask("Ground");
     }
     protected override void LoadComponents()
@@ -57,37 +59,40 @@ public class PlayerMoving : M_MonoBehaviour
         _movement = Vector3.zero;
         _movement.x = Input.GetAxisRaw("Horizontal");
         _movement.z = Input.GetAxisRaw("Vertical");
-
-        if (!_isJumping)
+        Vector3 moveDirection = (_movement.x * transform.right + _movement.z * transform.forward).normalized;
+        if (_isJumping)
         {
-            Vector3 moveDirection = _movement.normalized * _speed;
-            moveDirection.y = this._rigid.velocity.y; 
-
-            this._rigid.velocity = moveDirection;
-        }
-        else
-        {
-            Vector3 currentHorizontalVelocity = new Vector3(this._rigid.velocity.x, 0, this._rigid.velocity.z);
-            Vector3 newDirection = _movement.normalized * _speed;
-
-            if (_movement.magnitude > 0 && Vector3.Dot(currentHorizontalVelocity.normalized, newDirection.normalized) < 0.5f)
+            if (moveDirection != Vector3.zero && Vector3.Dot(moveDirection, _jumpDirection) < 0.95f)
             {
-                this._rigid.velocity = new Vector3(0, this._rigid.velocity.y, 0);
+                moveDirection = _jumpDirection;
+            }
+            else if (moveDirection == Vector3.zero)
+            {
+                moveDirection = _jumpDirection;
             }
         }
+        
+         moveDirection.y = _rigid.velocity.y;
+         _rigid.MovePosition(_rigid.position + moveDirection * _speed * Time.deltaTime);
+        
     }
+
 
     private void Jumping()
     {
         if(Input.GetKeyDown(KeyCode.Space) && !_isJumping)
         {
-            this._rigid.AddForce(Vector3.up * _jumpHeight, ForceMode.Impulse);
+            _isJumping = true;
+            _jumpDirection = (_movement.x * transform.right + _movement.z * transform.forward).normalized;
+            _rigid.AddForce(Vector3.up * _jumpHeight, ForceMode.Impulse);
         }
     }
     private void JumpTracking()
     {
         bool isHitting = Physics.CheckSphere(this.transform.position, 0.3f, _layerMask);
         _isJumping = !isHitting;
+        Debug.Log(_isJumping);
+        Debug.Log(isHitting);
     }
 
 }
