@@ -70,6 +70,8 @@ public class PlayerLook : M_MonoBehaviour
 
     private void SetStartCam(CinemachineVirtualCamera startCam)
     {
+        if (_listCam.Count == 0) return;
+
         _currentCam = startCam;
         foreach (CinemachineVirtualCamera cam in _listCam)
         {
@@ -84,15 +86,16 @@ public class PlayerLook : M_MonoBehaviour
         if (Input.GetKeyDown(KeyCode.V))
         {
             if (_listCam.Count == 0) return; 
-
             for (int i = 0; i < _listCam.Count; i++)
             {
                 _listCam[i].Priority = 10; 
 
                 if (_listCam[i] == _currentCam)
                 {
-                    
-                    _currentCam = (i == _listCam.Count - 1) ? _listCam[0] : _listCam[i + 1];
+                    if (i == _listCam.Count - 1)
+                        _currentCam = _listCam[0];
+                    else
+                        _currentCam = _listCam[i + 1];
                     _currentCam.Priority = 20;
                     break; 
                 }
@@ -119,6 +122,6 @@ public class PlayerLook : M_MonoBehaviour
 
         _xRot -= _mouseY;
         _xRot = Mathf.Clamp(_xRot, -80, 80);
-        _playerController.transform.localRotation = Quaternion.Euler(_xRot, 0, 0);
+        this.transform.localRotation = Quaternion.Euler(_xRot, 0, 0);
     }
 }
