@@ -65,7 +65,7 @@ public class PlayerLook : M_MonoBehaviour
 
     private void Start()
     {
-        SetStartCam(_thirdLookCam);      
+        SetStartCam(_firstLookCam);      
     }
 
     private void SetStartCam(CinemachineVirtualCamera startCam)
