@@ -7,7 +7,7 @@ public class PlayerAiming : M_MonoBehaviour
 {
     [SerializeField] private PlayerLook _playerLook;
     [SerializeField] private PlayerController _playerController;
-
+   
     protected override void LoadComponents()
     {
         base.LoadComponents();
