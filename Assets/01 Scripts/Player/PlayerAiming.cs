@@ -7,7 +7,8 @@ public class PlayerAiming : M_MonoBehaviour
 {
     [SerializeField] private PlayerLook _playerLook;
     [SerializeField] private PlayerController _playerController;
-   
+    [SerializeField] private Vector3 hitPoint;
+    public Vector3 HitPoint => hitPoint;
     protected override void LoadComponents()
     {
         base.LoadComponents();
@@ -27,11 +28,12 @@ public class PlayerAiming : M_MonoBehaviour
         _playerLook = this._playerController.PlayerLook;
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         RaycastHit hit;
         bool ray = Physics.Raycast(_playerLook.transform.position,_playerLook.transform.forward, out hit, Mathf.Infinity);
         Debug.DrawRay(_playerLook.transform.position, _playerLook.transform.forward * 10f, Color.magenta);
+        hitPoint = hit.point;
     }
     
 }

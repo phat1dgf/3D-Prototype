@@ -8,5 +8,7 @@ public static class CONSTANT
     public static string ThirdCamName = "ThirdLook";
 
     public static string LayerName_Ground = "Ground";
+
+    public static string Tag_Target = "Target";
     
 }
