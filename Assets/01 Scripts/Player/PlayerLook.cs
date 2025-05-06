@@ -83,7 +83,7 @@ public class PlayerLook : M_MonoBehaviour
     }
     private void SwitchCam()
     {
-        if (Input.GetKeyDown(KeyCode.V))
+        if (Input.GetKeyDown(KeyCode.B))
         {
             if (_listCam.Count == 0) return; 
             for (int i = 0; i < _listCam.Count; i++)
