@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Publisher : MonoBehaviour
+public class Publisher : M_MonoBehaviour
 {
     static Dictionary<string, List<Action<object[]>>> Listeners
          = new Dictionary<string, List<Action<object[]>>>();

@@ -9,13 +9,6 @@ public class TargetSpawner : M_MonoBehaviour
     [SerializeField] private float spawnDelay;
     Coroutine targetSpawningCoroutine;
     
-
-    protected override void Reset()
-    {
-        base.Reset();
-        spawnDelay = 1.5f;
-    }
-    
     IEnumerator TargetSpawningCoroutine()
     {
         WaitForSeconds waitSpawnDelay = new WaitForSeconds(spawnDelay);
@@ -25,6 +18,11 @@ public class TargetSpawner : M_MonoBehaviour
             GameObject spawnedTarget = TargetFactory.Instance.CreateTarget(TargetFactory.Target.targetDefault,this.transform.position,Quaternion.identity);
             spawnedTarget.GetComponentInChildren<MeshRenderer>().material.color = RandomColor();
         }
+    }
+
+    private void Start()
+    {
+        spawnDelay = GameManager.Instance.TargetSpawnDelay;
     }
 
     private Color RandomColor()
@@ -42,7 +40,6 @@ public class TargetSpawner : M_MonoBehaviour
             default: return CONSTANT.Red; 
         }
     }
-
 
     private void OnDisable()
     {

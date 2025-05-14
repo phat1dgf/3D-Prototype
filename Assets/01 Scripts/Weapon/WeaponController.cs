@@ -40,9 +40,10 @@ public class WeaponController : M_MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.V))
         {
+            Publisher.Notify(CONSTANT.Action_ChooseColor, KeyCode.V,_isMixing);
             if (_isMixing)
             {
-                CancelMixMode();
+                Invoke(nameof(CancelMixMode),0.1f);
             }
             else
             {
@@ -54,14 +55,17 @@ public class WeaponController : M_MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Z))
         {
             HandleColorInput(red);
+            Publisher.Notify(CONSTANT.Action_ChooseColor, KeyCode.Z);
         }
         else if (Input.GetKeyDown(KeyCode.X))
         {
             HandleColorInput(yellow);
+            Publisher.Notify(CONSTANT.Action_ChooseColor, KeyCode.X);
         }
         else if (Input.GetKeyDown(KeyCode.C))
         {
             HandleColorInput(blue);
+            Publisher.Notify(CONSTANT.Action_ChooseColor, KeyCode.C);
         }
     }
 
@@ -84,9 +88,10 @@ public class WeaponController : M_MonoBehaviour
                 _meshRenderer.material.color = mixed;
                 _currentColor = mixed;
 
-                CancelMixMode(); 
+                Invoke(nameof(CancelMixMode), 0.1f);
             }
         }
+        Publisher.Notify(CONSTANT.Action_MixColorUpdated, firstColor, secondColor);
     }
 
     void StartMixMode()
@@ -101,6 +106,7 @@ public class WeaponController : M_MonoBehaviour
         _isMixing = false;
         firstColor = null;
         secondColor = null;
+        Publisher.Notify(CONSTANT.Action_CancelMixMode);
     }
 
     Color MixColors(Color a, Color b)

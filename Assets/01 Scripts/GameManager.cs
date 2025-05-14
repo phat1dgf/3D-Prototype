@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : M_MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class GameManager : M_MonoBehaviour
     [SerializeField] private PlayerController _player;
     public PlayerController Player => _player;
 
+    [SerializeField] private float targetSpawnDelay;
+    public float TargetSpawnDelay => targetSpawnDelay;
 
     protected override void Awake()
     {
@@ -18,18 +21,17 @@ public class GameManager : M_MonoBehaviour
         if( _instance == null )
         {
             _instance = this;
+            DontDestroyOnLoad(this);
             return;
         }
         if( _instance.gameObject.GetInstanceID() != this.gameObject.GetInstanceID() )
         {
             Destroy(this.gameObject); 
         }
-        Init();
     }
     protected override void Reset()
     {
         base.Reset();
-        Init();
     }
 
     protected override void LoadComponents()
@@ -42,9 +44,16 @@ public class GameManager : M_MonoBehaviour
         if (_player != null) return;
         _player = FindAnyObjectByType<PlayerController>();
     }
-    private void Init()
+    private void MoveToMainMenu()
     {
-        
+        SceneManager.LoadScene(CONSTANT.SceneName_MainMenu);
     }
-    
+    private void MoveToGameplay()
+    {
+        SceneManager.LoadScene(CONSTANT.SceneName_Gameplay);
+    }
+    private void ExitGame()
+    {
+        Application.Quit();
+    }
 }

@@ -18,4 +18,20 @@ public static class CONSTANT
     public static Color Orange = new Color(1f, 0.5f, 0f);
     public static Color Purple = new Color(0.5f, 0f, 0.5f);
     public static Color Green = Color.green;
+
+    public static string NameObject_Red = "Red";   
+    public static string NameObject_Yellow = "Yellow";
+    public static string NameObject_Blue = "Blue";
+    public static string NameObject_Mix = "Mix";
+    public static string NameObject_MixColor1 = "MixColor1";
+    public static string NameObject_MixColor2 = "MixColor2";
+    public static string NameObject_ColorMix = "ColorMix";
+
+    public static string Action_ChooseColor = "onChooseColor";
+    public static string Action_MixColorUpdated = "MixColorUpdated";
+    public static string Action_CancelMixMode = "CancelMixMode";
+
+    public static string SceneName_Gameplay = "Gameplay";
+    public static string SceneName_MainMenu = "MainMenu";
+
 }
