@@ -12,8 +12,15 @@ public class GameManager : M_MonoBehaviour
     [SerializeField] private PlayerController _player;
     public PlayerController Player => _player;
 
-    [SerializeField] private float targetSpawnDelay;
-    public float TargetSpawnDelay => targetSpawnDelay;
+    [SerializeField] private float _targetSpawnDelay;
+    public float TargetSpawnDelay => _targetSpawnDelay;
+
+    private float _easyMode = 1.5f;
+    public float EasyMode => _easyMode;
+    private float _mediumMode = 1f;
+    public float MediumMode => _mediumMode;
+    private float _hardMode = 0.5f;
+    public float HardMode => _hardMode;
 
     protected override void Awake()
     {
@@ -44,15 +51,16 @@ public class GameManager : M_MonoBehaviour
         if (_player != null) return;
         _player = FindAnyObjectByType<PlayerController>();
     }
-    private void MoveToMainMenu()
+    public void MoveToMainMenu()
     {
         SceneManager.LoadScene(CONSTANT.SceneName_MainMenu);
     }
-    private void MoveToGameplay()
+    public void MoveToGameplay(float targetSpawnDelay)
     {
         SceneManager.LoadScene(CONSTANT.SceneName_Gameplay);
+        _targetSpawnDelay = targetSpawnDelay;
     }
-    private void ExitGame()
+    public void ExitGame()
     {
         Application.Quit();
     }

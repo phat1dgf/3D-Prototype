@@ -26,6 +26,14 @@ public static class CONSTANT
     public static string NameObject_MixColor1 = "MixColor1";
     public static string NameObject_MixColor2 = "MixColor2";
     public static string NameObject_ColorMix = "ColorMix";
+    public static string NameObject_Hard = "Hard";
+    public static string NameObject_Medium = "Medium";
+    public static string NameObject_Easy = "Easy";
+    public static string NameObject_Back = "Back";
+    public static string NameObject_Modes = "Modes";
+    public static string NameObject_MainMenu = "MainMenu";
+    public static string NameObject_Play = "Play";
+    public static string NameObject_Exit = "Exit";
 
     public static string Action_ChooseColor = "onChooseColor";
     public static string Action_MixColorUpdated = "MixColorUpdated";
