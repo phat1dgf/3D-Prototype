@@ -4,29 +4,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UIManager : M_MonoBehaviour
+public class PlayerUIManager : M_MonoBehaviour
 {
-    private static UIManager _instance;
-    public static UIManager Instance => _instance;
-
     [SerializeField] private GameObject _colorMix, _mixColor1, _mixColor2;
     [SerializeField] private RectTransform _red, _yellow, _blue, _mix;
     [SerializeField] private Sprite _redSprite, _yellowSprite, _blueSprite, _graySprite;
 
     private Vector3 scaleSize = new Vector3(1.25f, 1.25f, 1.25f);
-    protected override void Awake()
-    {
-        base.Awake();
-        if (_instance == null)
-        {
-            _instance = this;
-            return;
-        }
-        if (_instance.gameObject.GetInstanceID() != this.gameObject.GetInstanceID()) 
-        {
-            Destroy(gameObject);
-        }
-    }
 
     private void Start()
     {

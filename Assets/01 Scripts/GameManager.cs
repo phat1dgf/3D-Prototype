@@ -57,11 +57,24 @@ public class GameManager : M_MonoBehaviour
     }
     public void MoveToGameplay(float targetSpawnDelay)
     {
+        Playing();
         SceneManager.LoadScene(CONSTANT.SceneName_Gameplay);
         _targetSpawnDelay = targetSpawnDelay;
     }
     public void ExitGame()
     {
         Application.Quit();
+    }
+    public void Playing()
+    {
+        Time.timeScale = 1;
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+    }
+    public void Pause()
+    {
+        Time.timeScale = 0;
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
     }
 }

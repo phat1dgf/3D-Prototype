@@ -32,8 +32,10 @@ public static class CONSTANT
     public static string NameObject_Back = "Back";
     public static string NameObject_Modes = "Modes";
     public static string NameObject_MainMenu = "MainMenu";
+    public static string NameObject_SubMenu = "SubMenu";
     public static string NameObject_Play = "Play";
     public static string NameObject_Exit = "Exit";
+    public static string NameObject_Resume = "Resume";
 
     public static string Action_ChooseColor = "onChooseColor";
     public static string Action_MixColorUpdated = "MixColorUpdated";
