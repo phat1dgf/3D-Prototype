@@ -43,5 +43,8 @@ public static class CONSTANT
 
     public static string SceneName_Gameplay = "Gameplay";
     public static string SceneName_MainMenu = "MainMenu";
+    public static string SceneName_Lv1 = "Lv1";
+    public static string SceneName_Lv2 = "Lv2";
+    public static string SceneName_Lv3 = "Lv3";
 
 }

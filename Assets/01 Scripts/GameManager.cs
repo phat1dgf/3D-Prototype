@@ -9,9 +9,6 @@ public class GameManager : M_MonoBehaviour
     private static GameManager _instance;
     public static GameManager Instance => _instance;
 
-    [SerializeField] private PlayerController _player;
-    public PlayerController Player => _player;
-
     [SerializeField] private float _targetSpawnDelay;
     public float TargetSpawnDelay => _targetSpawnDelay;
 
@@ -44,23 +41,33 @@ public class GameManager : M_MonoBehaviour
     protected override void LoadComponents()
     {
         base.LoadComponents();
-        LoadPlayerController();
-    }
-    private void LoadPlayerController()
-    {
-        if (_player != null) return;
-        _player = FindAnyObjectByType<PlayerController>();
     }
     public void MoveToMainMenu()
     {
         SceneManager.LoadScene(CONSTANT.SceneName_MainMenu);
     }
-    public void MoveToGameplay(float targetSpawnDelay)
+    public void MoveToLv1(float targetSpawnDelay)
     {
         Playing();
-        SceneManager.LoadScene(CONSTANT.SceneName_Gameplay);
+        SceneManager.LoadScene(CONSTANT.SceneName_Lv1);
+        SceneManager.LoadScene(CONSTANT.SceneName_Gameplay, LoadSceneMode.Additive);
         _targetSpawnDelay = targetSpawnDelay;
     }
+    public void MoveToLv2(float targetSpawnDelay)
+    {
+        Playing();
+        SceneManager.LoadScene(CONSTANT.SceneName_Lv2);
+        SceneManager.LoadScene(CONSTANT.SceneName_Gameplay, LoadSceneMode.Additive);
+        _targetSpawnDelay = targetSpawnDelay;
+    } 
+    public void MoveToLv3(float targetSpawnDelay)
+    {
+        Playing();
+        SceneManager.LoadScene(CONSTANT.SceneName_Lv3);
+        SceneManager.LoadScene(CONSTANT.SceneName_Gameplay, LoadSceneMode.Additive);
+        _targetSpawnDelay = targetSpawnDelay;
+    }
+
     public void ExitGame()
     {
         Application.Quit();

@@ -6,6 +6,9 @@ using UnityEngine.SocialPlatforms;
 
 public class TargetSpawner : M_MonoBehaviour
 {
+    [SerializeField] private GameObject spawnPos;
+    
+
     [SerializeField] private float spawnDelay;
     Coroutine targetSpawningCoroutine;
     
@@ -22,6 +25,9 @@ public class TargetSpawner : M_MonoBehaviour
 
     private void Start()
     {
+        spawnPos = GameObject.Find("TargetSpawn");
+        this.transform.position = spawnPos.transform.position;
+
         spawnDelay = GameManager.Instance.TargetSpawnDelay;
     }
 

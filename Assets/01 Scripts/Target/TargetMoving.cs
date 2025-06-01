@@ -9,13 +9,20 @@ public class TargetMoving : M_MonoBehaviour
     [SerializeField] private Rigidbody _rigid;
     [SerializeField] private Vector3 _movement;
     [SerializeField] private float _speed;
+    [SerializeField] private GameObject targetDestiny, spawnedPos;
+    private Vector3 moveDir;
     protected override void LoadComponents()
     {
         base.LoadComponents();
         LoadTargetController();
         LoadRigidbody();
     }
-
+    private void OnEnable()
+    {
+        targetDestiny = GameObject.Find("TargetDestiny");
+        spawnedPos = GameObject.Find("TargetSpawn");
+        moveDir = targetDestiny.transform.position - spawnedPos.transform.position;
+    }
     private void LoadTargetController()
     {
         if (_targetController != null) return;
@@ -35,7 +42,9 @@ public class TargetMoving : M_MonoBehaviour
 
     private void Moving()
     {
-        _movement = _targetController.transform.right * -1;
+        
+
+        _movement = moveDir.normalized;
         _rigid.velocity = _movement * _speed;
     }
 }

@@ -42,15 +42,15 @@ public class MainMenuManager : M_MonoBehaviour
         });
         _easy.onClick.AddListener(() =>
         {
-            gameManager.MoveToGameplay(gameManager.EasyMode);
+            gameManager.MoveToLv1(gameManager.EasyMode);
         });
         _medium.onClick.AddListener(() =>
         {
-            gameManager.MoveToGameplay(gameManager.MediumMode);
+            gameManager.MoveToLv2(gameManager.MediumMode);
         });
         _hard.onClick.AddListener(() =>
         {
-            gameManager.MoveToGameplay(gameManager.HardMode);
+            gameManager.MoveToLv3(gameManager.HardMode);
         });
         _back.onClick.AddListener(() =>
         {
