@@ -9,6 +9,7 @@ public class PlayerController : M_MonoBehaviour
     public PlayerLook PlayerLook => _playerLook;
     [SerializeField] private WeaponController _weaponController;
     public WeaponController WeaponController => _weaponController;
+    [SerializeField] private GameObject spawnPos;
     protected override void LoadComponents()
     {
         base.LoadComponents();
@@ -27,5 +28,9 @@ public class PlayerController : M_MonoBehaviour
         if (_playerLook != null) return;
         _playerLook = this.GetComponentInChildren<PlayerLook>();
     }
-    
+    private void Start()
+    {
+        spawnPos = GameObject.Find("SpawnPos");
+        this.transform.position = spawnPos.transform.position;
+    }
 }

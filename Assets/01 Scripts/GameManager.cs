@@ -12,6 +12,8 @@ public class GameManager : M_MonoBehaviour
     [SerializeField] private float _targetSpawnDelay;
     public float TargetSpawnDelay => _targetSpawnDelay;
 
+    
+
     private float _easyMode = 1.5f;
     public float EasyMode => _easyMode;
     private float _mediumMode = 1f;

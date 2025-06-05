@@ -25,5 +25,6 @@ public class TargetColliding : M_MonoBehaviour,IGetHit
     public void GetHit()
     {
         this.transform.parent.gameObject.SetActive(false);
+        Publisher.Notify(CONSTANT.Action_ShootTarget);
     }
 }

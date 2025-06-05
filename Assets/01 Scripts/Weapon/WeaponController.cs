@@ -5,8 +5,6 @@ using UnityEngine;
 
 public class WeaponController : M_MonoBehaviour
 {
-    [SerializeField] private MeshRenderer _meshRenderer;
-
     private Color red = CONSTANT.Red;
     private Color yellow = CONSTANT.Yellow;
     private Color blue = CONSTANT.Blue;
@@ -27,13 +25,6 @@ public class WeaponController : M_MonoBehaviour
     protected override void LoadComponents()
     {
         base.LoadComponents();
-        LoadMeshRenderer();
-    }
-
-    private void LoadMeshRenderer()
-    {
-        if (_meshRenderer != null) return;
-        _meshRenderer = this.GetComponentInChildren<MeshRenderer>();
     }
 
     void Update()
@@ -71,7 +62,6 @@ public class WeaponController : M_MonoBehaviour
 
     void HandleColorInput(Color color)
     {
-        _meshRenderer.material.color = color;
         _currentColor = color;
 
         if (_isMixing)
@@ -85,7 +75,6 @@ public class WeaponController : M_MonoBehaviour
                 secondColor = color;
 
                 Color mixed = MixColors(firstColor.Value, secondColor.Value);
-                _meshRenderer.material.color = mixed;
                 _currentColor = mixed;
 
                 Invoke(nameof(CancelMixMode), 0.1f);

@@ -6,12 +6,19 @@ using UnityEngine;
 
 public class UIManager : M_MonoBehaviour
 {
-    [SerializeField] private GameObject _subMenu;
+    [SerializeField] private GameObject _subMenu, _finishMenu;
 
     protected override void LoadComponents()
     {
         base.LoadComponents();
         LoadSubMenu();
+        LoadFinishMenu();
+    }
+
+    private void LoadFinishMenu()
+    {
+        if (_finishMenu != null) return;
+        _finishMenu = GameObject.Find(CONSTANT.NameObject_FinishMenu);
     }
 
     private void LoadSubMenu()
@@ -22,11 +29,22 @@ public class UIManager : M_MonoBehaviour
     private void Start()
     {
         _subMenu.SetActive(false);
+        _finishMenu.SetActive(false);
     }
     private void Update()
     {
         OpenSubMenu();
+        OpenFinishMenu();
     }
+
+    private void OpenFinishMenu()
+    {
+        if (ScoreManager.Instance.IsFinished)
+        {
+            _finishMenu.SetActive(true);
+        }
+    }
+
     private void OpenSubMenu()
     {
         GameManager gameManager = GameManager.Instance;

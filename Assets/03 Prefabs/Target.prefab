@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1170960818825995511}
   - component: {fileID: 7757851438232146710}
   - component: {fileID: 7153465063420350246}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TargetColliding
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -78,7 +78,7 @@ GameObject:
   - component: {fileID: 6172377959622894813}
   - component: {fileID: 6311054333541825326}
   - component: {fileID: 4114443082113204454}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Target
   m_TagString: Target
   m_Icon: {fileID: 0}
@@ -154,7 +154,7 @@ GameObject:
   - component: {fileID: 2587300656580384697}
   - component: {fileID: 3943972840313478838}
   - component: {fileID: 4509192572805491635}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Avatar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -236,7 +236,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1780006227580382955}
   - component: {fileID: 2110629571685560452}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TargetMoving
   m_TagString: Untagged
   m_Icon: {fileID: 0}

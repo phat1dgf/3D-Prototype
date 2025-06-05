@@ -42,8 +42,6 @@ public class TargetMoving : M_MonoBehaviour
 
     private void Moving()
     {
-        
-
         _movement = moveDir.normalized;
         _rigid.velocity = _movement * _speed;
     }

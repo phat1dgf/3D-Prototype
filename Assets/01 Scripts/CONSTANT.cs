@@ -33,13 +33,16 @@ public static class CONSTANT
     public static string NameObject_Modes = "Modes";
     public static string NameObject_MainMenu = "MainMenu";
     public static string NameObject_SubMenu = "SubMenu";
+    public static string NameObject_FinishMenu = "FinishMenu";
     public static string NameObject_Play = "Play";
     public static string NameObject_Exit = "Exit";
     public static string NameObject_Resume = "Resume";
+    public static string NameObject_Replay = "Replay";
 
     public static string Action_ChooseColor = "onChooseColor";
     public static string Action_MixColorUpdated = "MixColorUpdated";
     public static string Action_CancelMixMode = "CancelMixMode";
+    public static string Action_ShootTarget = "ShootTarget";
 
     public static string SceneName_Gameplay = "Gameplay";
     public static string SceneName_MainMenu = "MainMenu";
