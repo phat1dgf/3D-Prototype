@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using UnityEditorInternal;
 using UnityEngine;
 
 public class ScoreManager : M_MonoBehaviour
@@ -52,6 +51,7 @@ public class ScoreManager : M_MonoBehaviour
     {
         _currentScore = 0;
         _isFinished = false;
+        GameManager.Instance.Playing();
     }
     private void Update()
     {

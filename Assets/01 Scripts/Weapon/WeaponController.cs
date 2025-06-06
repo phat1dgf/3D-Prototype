@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class WeaponController : M_MonoBehaviour
 {
@@ -22,6 +24,27 @@ public class WeaponController : M_MonoBehaviour
     [SerializeField] private Color _currentColor;
     public Color CurrentColor => _currentColor;
 
+    [SerializeField] private InputActionReference redAction;
+    [SerializeField] private InputActionReference yellowAction;
+    [SerializeField] private InputActionReference blueAction;
+    [SerializeField] private InputActionReference mixAction;
+
+    private void OnEnable()
+    {
+        redAction.action.Enable();
+        yellowAction.action.Enable();
+        blueAction.action.Enable();
+        mixAction.action.Enable();
+    }
+
+    private void OnDisable()
+    {
+        redAction.action.Disable();
+        yellowAction.action.Disable();
+        blueAction.action.Disable();
+        mixAction.action.Disable();
+    }
+
     protected override void LoadComponents()
     {
         base.LoadComponents();
@@ -29,12 +52,12 @@ public class WeaponController : M_MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.V))
+        if (Input.GetKeyDown(KeyCode.V) || mixAction.action.WasPressedThisFrame())
         {
-            Publisher.Notify(CONSTANT.Action_ChooseColor, KeyCode.V,_isMixing);
+            Publisher.Notify(CONSTANT.Action_ChooseColor, KeyCode.V, _isMixing);
             if (_isMixing)
             {
-                Invoke(nameof(CancelMixMode),0.1f);
+                Invoke(nameof(CancelMixMode), 0.1f);
             }
             else
             {
@@ -43,17 +66,17 @@ public class WeaponController : M_MonoBehaviour
             return;
         }
 
-        if (Input.GetKeyDown(KeyCode.Z))
+        if (Input.GetKeyDown(KeyCode.Z) || redAction.action.WasPressedThisFrame())
         {
             HandleColorInput(red);
             Publisher.Notify(CONSTANT.Action_ChooseColor, KeyCode.Z);
         }
-        else if (Input.GetKeyDown(KeyCode.X))
+        else if (Input.GetKeyDown(KeyCode.X) || yellowAction.action.WasPressedThisFrame())
         {
             HandleColorInput(yellow);
             Publisher.Notify(CONSTANT.Action_ChooseColor, KeyCode.X);
         }
-        else if (Input.GetKeyDown(KeyCode.C))
+        else if (Input.GetKeyDown(KeyCode.C) ||blueAction.action.WasPressedThisFrame())
         {
             HandleColorInput(blue);
             Publisher.Notify(CONSTANT.Action_ChooseColor, KeyCode.C);
@@ -107,6 +130,6 @@ public class WeaponController : M_MonoBehaviour
         if ((a == yellow && b == blue) || (a == blue && b == yellow))
             return green;
 
-        return a; 
+        return a;
     }
 }

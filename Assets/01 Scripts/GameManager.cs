@@ -50,21 +50,18 @@ public class GameManager : M_MonoBehaviour
     }
     public void MoveToLv1(float targetSpawnDelay)
     {
-        Playing();
         SceneManager.LoadScene(CONSTANT.SceneName_Lv1);
         SceneManager.LoadScene(CONSTANT.SceneName_Gameplay, LoadSceneMode.Additive);
         _targetSpawnDelay = targetSpawnDelay;
     }
     public void MoveToLv2(float targetSpawnDelay)
     {
-        Playing();
         SceneManager.LoadScene(CONSTANT.SceneName_Lv2);
         SceneManager.LoadScene(CONSTANT.SceneName_Gameplay, LoadSceneMode.Additive);
         _targetSpawnDelay = targetSpawnDelay;
     } 
     public void MoveToLv3(float targetSpawnDelay)
     {
-        Playing();
         SceneManager.LoadScene(CONSTANT.SceneName_Lv3);
         SceneManager.LoadScene(CONSTANT.SceneName_Gameplay, LoadSceneMode.Additive);
         _targetSpawnDelay = targetSpawnDelay;
@@ -86,4 +83,5 @@ public class GameManager : M_MonoBehaviour
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
     }
+   
 }
