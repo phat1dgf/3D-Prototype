@@ -46,7 +46,7 @@ public class PlayerMoving : M_MonoBehaviour
     {
         JumpTracking();
         Moving();
-        Jumping();
+        //Jumping();
         Running();
     }
 

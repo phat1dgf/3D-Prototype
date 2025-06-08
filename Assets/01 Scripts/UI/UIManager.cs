@@ -2,11 +2,13 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 
 public class UIManager : M_MonoBehaviour
 {
     [SerializeField] private GameObject _subMenu, _finishMenu;
+    [SerializeField] private InputActionReference _menuAction;
 
     protected override void LoadComponents()
     {
@@ -45,10 +47,19 @@ public class UIManager : M_MonoBehaviour
         }
     }
 
+    private void OnEnable()
+    {
+        _menuAction.action.Enable();
+    }
+    private void OnDisable()
+    {
+        _menuAction.action.Disable();
+    }
+
     private void OpenSubMenu()
     {
         GameManager gameManager = GameManager.Instance;
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) || _menuAction.action.WasPressedThisFrame())
         {
             if (_subMenu.activeSelf)
             {
