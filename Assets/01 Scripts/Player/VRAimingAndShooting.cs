@@ -15,7 +15,7 @@ public class VRAimingAndShooting : MonoBehaviour
     [SerializeField] private float rayDistance = 100f;
 
     private LineRenderer lineRenderer;
-    private Vector3 hitPoint;
+    [SerializeField] private Vector3 hitPoint;
     public Vector3 HitPoint => hitPoint;
 
     private void OnEnable() => triggerAction.action.Enable();
@@ -49,7 +49,7 @@ public class VRAimingAndShooting : MonoBehaviour
             endPoint = hit.point;
             GameObject aimedTarget = hit.collider.transform.root.gameObject;
 
-            if (aimedTarget.CompareTag(CONSTANT.Tag_Target) && triggerAction.action.WasPressedThisFrame())
+            if (aimedTarget.CompareTag(CONSTANT.Tag_Target) || triggerAction.action.WasPressedThisFrame())
             {
                 Shooting(aimedTarget, hit);
             }

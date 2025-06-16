@@ -44,6 +44,7 @@ public class UIManager : M_MonoBehaviour
         if (ScoreManager.Instance.IsFinished)
         {
             _finishMenu.SetActive(true);
+            ShowMenuInFrontOfPlayer(_finishMenu);
         }
     }
 
@@ -68,9 +69,25 @@ public class UIManager : M_MonoBehaviour
             }
             else
             {
-                gameManager.Pause();
+                //gameManager.Pause();
                 _subMenu.SetActive(true);
+                ShowMenuInFrontOfPlayer(_subMenu);
             }
         }
+    }
+    private void ShowMenuInFrontOfPlayer(GameObject menu, float distance = 2f)
+    {
+        Transform cameraTransform = Camera.main.transform;
+
+        Vector3 forward = cameraTransform.forward;
+        forward.y = 0;
+        forward.Normalize();
+
+        Vector3 targetPosition = cameraTransform.position + forward * distance;
+        menu.transform.position = targetPosition;
+
+        menu.transform.LookAt(cameraTransform);
+
+        menu.transform.Rotate(0, 180f, 0);
     }
 }
