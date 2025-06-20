@@ -27,7 +27,6 @@ public class VRAimingAndShooting : MonoBehaviour
         lineRenderer.positionCount = 2;
         lineRenderer.startWidth = 0.01f;
         lineRenderer.endWidth = 0.005f;
-        lineRenderer.material = new Material(Shader.Find("Unlit/Color"));
         lineRenderer.material.color = Color.red;
     }
 
